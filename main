@@ -7,12 +7,22 @@ void setup() {
   pinMode(13, OUTPUT);
   pinMode(2, INPUT);
 
+  // Start the serial communication at 9600 bits per second
+  Serial.begin(9600);
+
   // Attach an interrupt to the input pin that will call the glow function when the state changes
   attachInterrupt(digitalPinToInterrupt(pin), glow, CHANGE);
 }
 
 void loop() {
-  // This function is intentionally left empty as we are using an interrupt to control the output pin
+  // Read the state of the input pin
+  int sensorValue = digitalRead(pin);
+
+  // Print the sensor value to the serial monitor
+  Serial.println(sensorValue);
+
+  // Delay for 100 milliseconds
+  delay(100);
 }
 
 void glow() {
