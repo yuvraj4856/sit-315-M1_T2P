@@ -1,16 +1,23 @@
+// Declare the input pin and the initial state variable
 int pin = 2; 
-volatile int state = LOW; 
-void setup() {
-   pinMode(13, OUTPUT);
-  pinMode(2, INPUT);
-   attachInterrupt(digitalPinToInterrupt(pin), glow, CHANGE);
-   
-} 
-void loop() { 
-   
-} 
+volatile int state = LOW;
 
-void glow() { 
-   
-   state = !state; 
-  digitalWrite(13, state);}
+void setup() {
+  // Set pin 13 as an output pin and pin 2 as an input pin
+  pinMode(13, OUTPUT);
+  pinMode(2, INPUT);
+
+  // Attach an interrupt to the input pin that will call the glow function when the state changes
+  attachInterrupt(digitalPinToInterrupt(pin), glow, CHANGE);
+}
+
+void loop() {
+  // This function is intentionally left empty as we are using an interrupt to control the output pin
+}
+
+void glow() {
+  // Toggle the state of the LED by inverting the current state variable
+  state = !state;
+  // Set the output pin (LED) to the new state
+  digitalWrite(13, state);
+}
